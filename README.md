@@ -3,11 +3,9 @@ Setup instructions for Adguard Home and WireGuard
 
 
 # Adguard Home
-1. Configure docker container
-**Need docker and docker-compose**
-
-Create docker-compose.yaml file in /home/user/docker folder. Replace path to match your system and user, check with `pwd` command.
-
+1. Configure docker container  
+**Need docker and docker-compose**  
+Create docker-compose.yaml file in /home/user/docker folder. Replace path to match your system and user, check with `pwd` command.  
 ```docker-compose.yaml
 version: "2.1"
 services:
@@ -34,7 +32,7 @@ services:
       - /home/preference/adguard/work:/opt/adguardhome/work
       - /home/preference/adguard/conf:/opt/adguardhome/conf
 ```
-2. Start container
+2. Start container  
 ```zsh
 docker-compose up -d
 ```
@@ -44,8 +42,7 @@ docker-compose up -d
 4. (Disable systemd-resolved if its using port 53)
 https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#-running-on-a-system-with-resolved-daemon
 
-5. Add DNS filterlist
-
+5. Add DNS filterlist  
 E.g. [http://dbl.oisd.nl](http://dbl.oisd.nl)
 (I reccomend using only one list, as to avoid conflicts)
 

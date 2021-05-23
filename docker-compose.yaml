@@ -1,0 +1,50 @@
+version: "2.1"
+services:
+    adguard-home:
+        image: adguard/adguardhome
+        container_name: adguard-home
+        restart: unless-stopped
+        network_mode: host
+        dns:
+        - 127.0.0.1
+        - 1.1.1.1
+        ports:
+        - "53:53/tcp"
+        - "53:53/udp"
+        - "67:67/udp"
+        #- '68:68/tcp'
+        #- '68:68/udp'
+        - "80:80/tcp"
+        - "443:443/tcp"
+        - "853:853/tcp"
+        - "3000:3000/tcp"
+        - "99:99/tcp"
+        volumes:
+        - /home/preference/adguard/work:/opt/adguardhome/work
+        - /home/preference/adguard/conf:/opt/adguardhome/conf
+
+    wireguard:
+        image: ghcr.io/linuxserver/wireguard
+        container_name: wireguard
+        restart: unless-stopped
+        cap_add:
+        - NET_ADMIN
+        - SYS_MODULE
+        environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Europe/Oslo
+        #- SERVERURL=wireguard.domain.com #optional
+        #- SERVERPORT=51820 #optional
+        - PEERS=1 #optional
+        - PEERDNS=192.168.1.172 #optional
+        - INTERNAL_SUBNET=10.13.13.0 #optional
+        - ALLOWEDIPS=0.0.0.0/0 #optional
+        volumes:
+        - /home/preference/wireguard/config:/config
+        - /lib/modules:/lib/modules
+        ports:
+        - 51820:51820/udp
+
+
+
